@@ -1,3 +1,7 @@
 *~
 *.o
-libtriangulation.so
+moc_*.cpp
+*.pro.user
+lib/libtriangulation.so
+demo/launcher
+demo/Makefile
