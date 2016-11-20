@@ -39,10 +39,10 @@ fractal_stack_algorithm_result_t fractal_stack_algorithm (between_func_t between
             record.dir = outl ? FSR_Left : FSR_Right;
             stack[SP++] = record;
             if (outl) {
-                cur_tri = fractal_get_against(&T, e1_vx);
+                cur_tri = fractal_get_against(&T, e2_vx);
             }
             else {
-                cur_tri = fractal_get_against(&T, e2_vx);
+                cur_tri = fractal_get_against(&T, e1_vx);
             }
             if (cur_tri != 0) {
                 T = tri[cur_tri];
