@@ -17,7 +17,8 @@ fractal_stack_algorithm_result_t fractal_stack_algorithm (between_func_t between
                                                           index_t nxt_vx,
                                                           index_t new_vx,
                                                           index_t aux_vx,
-                                                          index_t cur_tri);
+                                                          index_t cur_tri,
+                                                          notify_func_t notify);
 
 #ifdef __cplusplus
 }

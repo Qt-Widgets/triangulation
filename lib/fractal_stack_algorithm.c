@@ -10,7 +10,8 @@ fractal_stack_algorithm_result_t fractal_stack_algorithm (between_func_t between
                                                           index_t nxt_vx,
                                                           index_t new_vx,
                                                           index_t aux_vx,
-                                                          index_t cur_tri) {
+                                                          index_t cur_tri,
+                                                          notify_func_t notify) {
     index_t nxt_tri = *p_nxt_tri;
     fractal_stack_record_t* stack = malloc(nxt_tri * sizeof(fractal_stack_record_t));
     index_t SP = 0;
@@ -82,6 +83,9 @@ fractal_stack_algorithm_result_t fractal_stack_algorithm (between_func_t between
     lastr = cur_tri;
     tri[cur_tri] = T;
     ++nxt_tri;
+    if (notify) {
+        notify(FNE_StackWound, tri, nxt_tri, stack, SP);
+    }
     while (SP > 0) {
         record = stack[--SP];
         cur_tri = record.T;
@@ -111,6 +115,9 @@ fractal_stack_algorithm_result_t fractal_stack_algorithm (between_func_t between
     free(stack);
     tri[lastl].CA = 0;
     tri[lastr].AB = 0;
+    if (notify) {
+        notify(FNE_StackUnwound, tri, nxt_tri);
+    }
     edge[cur_vx] = lastl;
     edge[new_vx] = lastr;
     if (edge[nxt_vx] == cur_tri) {

@@ -28,4 +28,17 @@ typedef struct {
     enum {FSR_Left, FSR_Right} dir;
 } fractal_stack_record_t;
 
+typedef enum {
+   FNE_TriangleAdded,
+   FNE_StackWound,
+   FNE_StackUnwound
+} notify_event_t;
+
+typedef void (*notify_func_t) (notify_event_t, ...);
+/*
+FNE_TriangleAdded, const linked_triangle_t* tri, index_t cur_tri
+FNE_StackWound, const linked_triangle_t* tri, index_t cur_tri, const fractal_stack_record_t* stack, index_t SP
+FNE_StackUnwound, const linked_triangle_t* tri, index_t cur_tri
+*/
+
 #endif

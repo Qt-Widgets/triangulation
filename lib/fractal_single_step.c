@@ -2,7 +2,13 @@
 #include "fractal_aux.h"
 #include "fractal_stack_algorithm.h"
 
-fractal_single_step_result_t fractal_single_step (index_t N, between_func_t between, linked_triangle_t* tri, index_t* p_nxt_tri, index_t* edge, index_t* p_cur_vx) {
+fractal_single_step_result_t fractal_single_step (index_t N,
+                                                  between_func_t between,
+                                                  linked_triangle_t* tri,
+                                                  index_t* p_nxt_tri,
+                                                  index_t* edge,
+                                                  index_t* p_cur_vx,
+                                                  notify_func_t notify) {
     fractal_single_step_result_t result;
     index_t cur_vx = *p_cur_vx;
     index_t cur_tri = edge[cur_vx];
@@ -49,9 +55,22 @@ fractal_single_step_result_t fractal_single_step (index_t N, between_func_t betw
             T.CA = cur_tri;
             T.AB = 0;
             tri[nxt_tri++] = T;
+            if (notify) {
+                notify(FNE_TriangleAdded, tri, nxt_tri);
+            }
         }
         else {
-            fractal_stack_algorithm_result_t stack_algorithm_result = fractal_stack_algorithm(between, tri, &nxt_tri, edge, cur_vx, nxt_vx, new_vx, aux_vx, cur_tri);
+            fractal_stack_algorithm_result_t stack_algorithm_result =
+                fractal_stack_algorithm(between,
+                                        tri,
+                                        &nxt_tri,
+                                        edge,
+                                        cur_vx,
+                                        nxt_vx,
+                                        new_vx,
+                                        aux_vx,
+                                        cur_tri,
+                                        notify);
             if (stack_algorithm_result == FSA_Fail) {
                 return FSS_Fail;
             }
