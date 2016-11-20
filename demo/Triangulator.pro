@@ -1,7 +1,9 @@
+CONFIG += debug
 TEMPLATE = app
 TARGET = launcher
 DEPENDPATH += .
-INCLUDEPATH += . ../triangulation
+INCLUDEPATH += . ../lib
+LIBS += -L../lib -ltriangulation
 
 QT += widgets
 
