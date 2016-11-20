@@ -5,3 +5,4 @@ moc_*.cpp
 lib/libtriangulation.so
 demo/launcher
 demo/Makefile
+test/test
